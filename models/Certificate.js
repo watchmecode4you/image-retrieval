@@ -28,7 +28,7 @@ Certificate.prototype.getCertificates =  function () {
                         source: {$eq : certObject.source}
                     })
                     //retreivign all the certificates from the mongo db databse and storing them in array
-                    console.log(cursor)
+                    //console.log(cursor)
                     const certs = await cursor.toArray();
                     resolve(certs)
                     //console.log(certs)
