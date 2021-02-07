@@ -1,41 +1,31 @@
 <%- include('includes/header') %>
-    <div class="flex-vertical">
 
-        <div class="title">
-            <h5>Welcome my friend!</h5>
-            <h5>Please select your criteria to display the right certificates</h5>
+
+<div class="page-title">
+
+    <h1>Kindly choose between the below two options</h1>
+
+</div>
+
+
+<div class="flex-horizontal">
+
+    <div class="card" style="width: 18rem;">
+        <a href="/add-certificates"><img class="card-img-top" src="/assets/add_document.jpg" alt="Card image cap" style="height:15rem;"></a>
+        <div class="card-body">
+            <span class="card-text">Insert a new certificate to your list.</span>
         </div>
-
-        <div class="form-container">
-
-            <form action="show-certificates" method="POST">
-
-                <div class="couple-elements">
-                    <label for="topic" class="labels">Topic</label>
-                    <select id="topic" name="topic" class="form-control select-elements">
-                        <option value=""></option>
-                        <option value="JavaScript">JavaScript</option>
-                        <option value="Video Editting">Video Editting</option>
-                        <option value="Web Design">Web Design</option>
-                    </select>
-                </div>
-    
-                <div class="couple-elements">
-                    <label for="source" class="labels">Source</label>
-                    <select id="source" name="source" class="form-control select-elements">
-                        <option value=""></option>
-                        <option value="Udemy">Udemy</option>
-                        <option value="Coursera">Coursera</option>
-                        <option value="LinkedIn">LinkedIn</option>
-                    </select>
-                </div>
-    
-                <button type="submit" class="btn btn-primary btn-custom">Submit</button>
-
-            </form>
-
-        </div>
-        
     </div>
+
+    <div class="card" style="width: 18rem;">
+        <a href="/filter-certificates"><img class="card-img-top" src="/assets/view_document.jpg" alt="Card image cap" style="height:15rem;"></a>
+        <div class="card-body">
+            <span class="card-text">View available certificates.</span>
+        </div>
+    </div>
+
+</div>
+
+
 
 <%- include('includes/footer') %>

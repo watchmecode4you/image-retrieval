@@ -14,3 +14,8 @@ exports.showCertificates = async function (req, res, next){
     })
 
 }
+
+
+exports.addCertificate = function (req, res, next){
+    res.json("trying to add a certificate")
+}
