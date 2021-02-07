@@ -1,0 +1,112 @@
+$form-bgcolor : #ffffff;
+$form-color: #0064cf;
+html{
+    width: 100vw;
+    height: 100vh;
+}
+
+body{
+    color: #555555;
+    width: 100vw;
+    height: 100vh;
+}
+
+.flex-vertical{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100vw;
+    height: 100vh;
+
+    .title{
+        width: 75%;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        text-align: center;
+        margin: 20px;
+        color: $form-color
+    }
+
+    .form-container{
+        padding: 20px;;
+        width: 75%;
+        border: solid 1px $form-bgcolor;
+        border-radius: 10px;
+        background-color:$form-bgcolor;
+        color: $form-color;
+
+        .couple-elements{
+            display: flex;
+            flex-direction: row;
+            width:100%;
+
+
+            .labels{
+                width: 30%;
+                margin: 10px;
+                font-weight: 600;
+            }
+    
+            .select-elements{
+                width: 60%;
+                margin: 10px;
+                background-color: transparent;
+                color: $form-color;
+
+                option{
+                    background-color: $form-bgcolor;
+                    font-weight: 600;
+                }
+            }
+        }
+
+        .btn-custom{
+            margin:10px
+        }
+
+    }
+}
+
+.page-title{
+    height: 200px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-horizontal{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+
+.certificate{
+    text-align: center;
+
+    .certificate-image{
+        width: 320px;
+        height: 240px;
+        padding: 20px;
+        transition: all 0.5s ease;
+    
+        &:hover{
+            transform: scale(1.2);
+        }
+    }
+}
+
+.page-redirect{
+    height: 200px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+

@@ -1,0 +1,32 @@
+<%- include('includes/header') %>
+
+    <div class="page-title">
+
+        <h1>Certificates</h1>
+
+    </div>
+
+    <div class="flex-horizontal">
+        <% if(certs.length === 0){ %>
+            <div>
+                <span> There were no certificates that match your criteria</span>
+            </div> 
+        <% } else {
+            certs.forEach(certificate => { %>
+                <div class="certificate">
+                    <img src="<%= certificate.image_src %>" alt="<%= certificate.name %>" class="certificate-image"> 
+                    <figcaption> <%= certificate.name %> </figcaption>
+                </div>  
+            <% }) 
+         } %>
+    </div>
+
+
+
+    <div class="page-redirect">
+
+        <h1><a href="/"> Return to the homepage</a></h1>
+
+    </div>
+
+<%- include('includes/footer') %>
