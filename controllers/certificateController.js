@@ -16,6 +16,14 @@ exports.showCertificates = async function (req, res, next){
 }
 
 
-exports.addCertificate = function (req, res, next){
-    res.json("trying to add a certificate")
+exports.addCertificate = async function (req, res, next){
+    console.log(req.body)
+    let certificate = new Certificate(req.body)
+    await certificate.addCertificate()
+    .then((successMessage)=>{
+        res.render('notification',{message: successMessage})
+    })
+    .catch((errorMessage) => {
+        res.render('notification', {message: errorMessage})
+    })
 }

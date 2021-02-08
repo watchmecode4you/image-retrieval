@@ -1,7 +1,9 @@
 const MongoClient = require('mongodb').MongoClient;
 const dotenv = require('dotenv')
 dotenv.config()
-const uri = process.env.MONGOSTRING
+const mongo_uri = process.env.MONGO_STRING
+const mongo_database = process.env.MONGO_DATABASE
+const mongo_collection = process.env.MONGO_COLLECTION
 
 
 //storing the data in the req.body in a variable
@@ -14,7 +16,7 @@ Certificate.prototype.getCertificates = function () {
     return new Promise((resolve, reject) => {
         try {
             // instantiating the Mongo Client instance 
-            const client = new MongoClient(uri, {
+            const client = new MongoClient(mongo_uri, {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             });
@@ -23,7 +25,7 @@ Certificate.prototype.getCertificates = function () {
                     reject(err)
                 } else {
                     //grabbing the certificate collection
-                    const certificatesCollection = client.db("certificates-db").collection("certificates");
+                    const certificatesCollection = client.db(mongo_database).collection(mongo_collection);
                     //console.log(certObject.source)
                     let cursor = await certificatesCollection
                         .find({
@@ -49,5 +51,40 @@ Certificate.prototype.getCertificates = function () {
     })
 }
 
+Certificate.prototype.addCertificate = function () {
+
+    let certificateToAdd = {
+        topic: this.certObj.topic,
+        source: this.certObj.source,
+        name: this.certObj.name,
+        image_url: this.certObj.image_url
+    }
+
+    let errorMessage = "Something went wrong and we could not add your certificate. Please try again"
+    let successMessage = "Certificate was successfully added"
+
+    return new Promise((resolve, reject) => {
+        try {
+            const client = new MongoClient(mongo_uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            })
+            client.connect((err) => {
+                if(err){
+                    reject(errorMessage)
+                }else{
+                    const certiticatesCollection = client.db(mongo_database).collection(mongo_collection)
+                    const result = certificatesCollection.insertOne(certificateToAdd)
+                    console.log(`Inserted a new certificaet with the following id: ${result.insertedId}`)
+                    resolve(successMessage)
+                }
+            })
+        } catch {
+            console.log(error)
+            reject(errorMessage)
+        }
+    })
+
+}
 
 module.exports = Certificate
