@@ -2,13 +2,12 @@ const Certificate = require("../models/Certificate")
 
 exports.showCertificates = async function (req, res, next){
     let certificate = new Certificate(req.body)
-    /* let mycertificates =  */await certificate.getCertificates()
-    .then((certs) => {   
-        //console.log(certs)
-        res.render('certificates', { certs: certs })
-        //console.log(certs)
+    await certificate.getCertificates()
+    .then((certificates) => {   
+        //console.log(certificates)
+        res.render('certificates', {certs: certificates})
     })
-    .catch((error) =>{
+    .catch((error) => {
         // displaying the error on the screen
         res.render('404', {error : error})
     })
@@ -20,10 +19,25 @@ exports.addCertificate = async function (req, res, next){
     console.log(req.body)
     let certificate = new Certificate(req.body)
     await certificate.addCertificate()
-    .then((successMessage)=>{
-        res.render('notification',{message: successMessage})
+    .then((successMessage) => {
+        //console.log(certs)
+        res.render('notification', {message: successMessage})
     })
     .catch((errorMessage) => {
+        // displaying the error on the screen
         res.render('notification', {message: errorMessage})
+    })
+}
+
+exports.showCertificateDetails = async function (req, res, next){
+    const certificate = new Certificate(req.body, req.params.id)
+    await certificate.getDetails()
+    .then((certificateDetails) => {
+        //res.render('details')
+        res.json(certificateDetails)
+    })
+    .catch((error) => {
+        //res.render('404', {error: error})
+        res.json(error)
     })
 }

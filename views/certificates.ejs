@@ -14,7 +14,7 @@
         <% } else {
             certs.forEach(certificate => { %>
                 <div class="certificate">
-                    <img src="<%= certificate.image_src %>" alt="<%= certificate.name %>" class="certificate-image"> 
+                    <a href="/certificate-details/<%= certificate._id %>"><img src="<%= certificate.image_src %>" alt="<%= certificate.name %>" class="certificate-image"></a>
                     <figcaption> <%= certificate.name %> </figcaption>
                 </div>  
             <% }) 

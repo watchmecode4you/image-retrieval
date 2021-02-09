@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+const ObjectID = require('mongodb').ObjectID
 const dotenv = require('dotenv')
 dotenv.config()
 const mongo_uri = process.env.MONGO_STRING
@@ -7,8 +8,9 @@ const mongo_collection = process.env.MONGO_COLLECTION
 
 
 //storing the data in the req.body in a variable
-let Certificate = function (certObj) {
+let Certificate = function (certObj, certificateId) {
     this.certObj = certObj
+    this.certificateId = certificateId
 }
 
 Certificate.prototype.getCertificates = function () {
@@ -37,10 +39,9 @@ Certificate.prototype.getCertificates = function () {
                             }
                         })
                     //retreivign all the certificates from the mongo db databse and storing them in array
-                    //console.log(cursor)
-                    const certs = await cursor.toArray();
-                    resolve(certs)
-                    //console.log(certs)
+                    const certificates = await cursor.toArray();
+                    resolve(certificates)
+                    //console.log(certifications)
                 }
             })
         } catch {
@@ -51,13 +52,41 @@ Certificate.prototype.getCertificates = function () {
     })
 }
 
+Certificate.prototype.getDetails = function () {
+    return new Promise((resolve, reject) => {
+        try{
+            const client = new MongoClient(mongo_uri, {
+                useNewUrlParser: true,
+                useUnifiedTopology: true
+            })
+            client.connect(async (err) => {
+                if(err){
+                    reject(err)
+                }else{
+                    const collection = client.db(mongo_database).collection(mongo_collection)
+                    let cursor = await collection
+                    .findOne({
+                        _id: {$eq : new ObjectID(this.certificateId)}
+                    })
+                    let certificateDetails = cursor
+                    console.log(certificateDetails)
+                    resolve(certificateDetails)
+                }
+            })
+
+        }catch{
+            reject(error)
+        }
+    })
+}
+
 Certificate.prototype.addCertificate = function () {
 
     let certificateToAdd = {
-        topic: this.certObj.topic,
         source: this.certObj.source,
         name: this.certObj.name,
-        image_url: this.certObj.image_url
+        topic: this.certObj.topic,
+        image_src: this.certObj.image_url
     }
 
     let errorMessage = "Something went wrong and we could not add your certificate. Please try again"
@@ -69,14 +98,20 @@ Certificate.prototype.addCertificate = function () {
                 useNewUrlParser: true,
                 useUnifiedTopology: true
             })
-            client.connect((err) => {
+            client.connect(async (err) => {
                 if(err){
                     reject(errorMessage)
                 }else{
-                    const certiticatesCollection = client.db(mongo_database).collection(mongo_collection)
-                    const result = certificatesCollection.insertOne(certificateToAdd)
-                    console.log(`Inserted a new certificaet with the following id: ${result.insertedId}`)
-                    resolve(successMessage)
+                    const certificatesCollection = client.db(mongo_database).collection(mongo_collection)
+                    await certificatesCollection.insertOne(certificateToAdd, (err, result) => {
+                        if(err){
+                            console.log(err)
+                            reject(errorMessage)
+                        }else{
+                            console.log(`Inserted a new certificate with the following id: ${result.insertedId}`)
+                            resolve(successMessage)
+                        }
+                    })
                 }
             })
         } catch {
@@ -86,5 +121,7 @@ Certificate.prototype.addCertificate = function () {
     })
 
 }
+
+
 
 module.exports = Certificate
