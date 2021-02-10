@@ -12,4 +12,8 @@ router.get('/certificate-details/:id', certificateController.showCertificateDeta
 router.post('/filter', certificateController.showCertificates)
 router.post('/add', certificateController.addCertificate)
 
+
+//delete routes
+router.delete('/delete/:id', certificateController.deleteCertificate)
+
 module.exports = router;

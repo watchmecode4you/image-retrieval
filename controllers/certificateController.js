@@ -14,7 +14,6 @@ exports.showCertificates = async function (req, res, next){
 
 }
 
-
 exports.addCertificate = async function (req, res, next){
     console.log(req.body)
     let certificate = new Certificate(req.body)
@@ -40,4 +39,8 @@ exports.showCertificateDetails = async function (req, res, next){
         res.render('404', {error: error})
         //res.json(error)
     })
+}
+
+exports.deleteCertificate = function(req, res, next){
+    res.json(`Attempting to delete the post with id equla to ${req.params.id}`)
 }
