@@ -9,7 +9,9 @@ body {
   height: 100vh;
 }
 
-.title {
+.page-title {
+  height: 200px;
+  text-align: center;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -17,9 +19,12 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  justify-items: center;
-  text-align: center;
-  margin: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   color: #0064cf;
 }
 
@@ -83,25 +88,6 @@ body {
   margin: 10px;
 }
 
-.page-title {
-  height: 200px;
-  text-align: center;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  color: #0064cf;
-}
-
 .flex-horizontal {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -123,7 +109,7 @@ body {
   text-align: center;
 }
 
-.certificate .certificate-image {
+.certificate-image {
   width: 320px;
   height: 240px;
   padding: 20px;
@@ -131,7 +117,7 @@ body {
   transition: all 0.5s ease;
 }
 
-.certificate .certificate-image:hover {
+.certificate-image:hover {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }

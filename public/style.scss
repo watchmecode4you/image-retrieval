@@ -12,14 +12,25 @@ body{
     height: 100vh;
 }
 
-.title{
+.page-title{
+    height: 200px;
+    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-items: center;
-    text-align: center;
-    margin: 20px;
+    align-items: center;
+    justify-content: center;
     color: $form-color
 }
+
+
+// .title{
+//     display: flex;
+//     flex-direction: column;
+//     justify-items: center;
+//     text-align: center;
+//     margin: 20px;
+//     color: $form-color
+// }
 
 .flex-vertical{
     display: flex;
@@ -69,16 +80,6 @@ body{
     }
 }
 
-.page-title{
-    height: 200px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    color: $form-color
-}
-
 .flex-horizontal{
     display: flex;
     flex-direction: row;
@@ -89,16 +90,16 @@ body{
 
 .certificate{
     text-align: center;
+}
 
-    .certificate-image{
-        width: 320px;
-        height: 240px;
-        padding: 20px;
-        transition: all 0.5s ease;
-    
-        &:hover{
-            transform: scale(1.2);
-        }
+.certificate-image{
+    width: 320px;
+    height: 240px;
+    padding: 20px;
+    transition: all 0.5s ease;
+
+    &:hover{
+        transform: scale(1.2);
     }
 }
 

@@ -33,11 +33,11 @@ exports.showCertificateDetails = async function (req, res, next){
     const certificate = new Certificate(req.body, req.params.id)
     await certificate.getDetails()
     .then((certificateDetails) => {
-        //res.render('details')
-        res.json(certificateDetails)
+        res.render('details', {certificateDetails, certificateDetails})
+        //res.json(certificateDetails)
     })
     .catch((error) => {
-        //res.render('404', {error: error})
-        res.json(error)
+        res.render('404', {error: error})
+        //res.json(error)
     })
 }
